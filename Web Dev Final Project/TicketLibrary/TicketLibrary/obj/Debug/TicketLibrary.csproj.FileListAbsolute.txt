@@ -1,0 +1,5 @@
+C:\Users\kennedy3084\Desktop\Final-Projects\Web Dev Final Project\TicketLibrary\TicketLibrary\obj\Debug\TicketLibrary.csprojResolveAssemblyReference.cache
+C:\Users\kennedy3084\Desktop\Final-Projects\Web Dev Final Project\TicketLibrary\TicketLibrary\bin\Debug\TicketLibrary.dll
+C:\Users\kennedy3084\Desktop\Final-Projects\Web Dev Final Project\TicketLibrary\TicketLibrary\bin\Debug\TicketLibrary.pdb
+C:\Users\kennedy3084\Desktop\Final-Projects\Web Dev Final Project\TicketLibrary\TicketLibrary\obj\Debug\TicketLibrary.dll
+C:\Users\kennedy3084\Desktop\Final-Projects\Web Dev Final Project\TicketLibrary\TicketLibrary\obj\Debug\TicketLibrary.pdb
