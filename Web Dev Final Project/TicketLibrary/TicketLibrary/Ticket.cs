@@ -8,9 +8,12 @@ namespace TicketLibrary
 {
     public class Ticket
     {
+        private int p;
+
         public int Id { get; set; }
         public string Building { get; set; }
         public string Description { get; set; }
+        public string Status { get; set; }
 
 
         public Employee SubmittedBy { get; set; }
@@ -19,7 +22,7 @@ namespace TicketLibrary
 
        
 
-        public Ticket(int id, string building, string description, Employee submittedBy, Employee assignedTo)
+        public Ticket(int id, string building, string description, string status, Employee submittedBy, Employee assignedTo)
         {
             Id = id;
             Building = building;
@@ -27,6 +30,12 @@ namespace TicketLibrary
             SubmittedBy = submittedBy;
             AssignedTo = assignedTo;
 
+        }
+
+        public Ticket(int Id)
+        {
+            // TODO: Complete member initialization
+            this.Id = Id;
         }
 
     }
