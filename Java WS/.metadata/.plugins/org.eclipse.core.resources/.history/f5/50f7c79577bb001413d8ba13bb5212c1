@@ -199,7 +199,7 @@ public class GUIConsole extends JFrame implements ChatIF {
 	    }
 	    catch(ArrayIndexOutOfBoundsException e)
 	    {
-	    	userName ="bob";
+	    	userName ="doug";
 	    }
 		
 		GUIConsole clientConsole = new GUIConsole(host, port, userName);

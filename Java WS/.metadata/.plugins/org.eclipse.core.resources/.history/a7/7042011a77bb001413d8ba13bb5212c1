@@ -1,7 +1,6 @@
 
 
 import java.io.*;
-import java.util.Scanner;
 
 
 /**
@@ -90,8 +89,6 @@ public class EchoServer extends AbstractServer
    }
   }
   
-  
-  //Handles messages from Server
 	  public void handleMessageFromServerUI(String message)
 	    {
 	  	if (message.indexOf("#") == 0) {
@@ -113,7 +110,7 @@ public class EchoServer extends AbstractServer
 	  	}
 	    }
 
-  //Handles user input from the client
+  
  public void handleClientCommand(Object msg, ConnectionToClient client)
  {
 	 String message = (String)msg;
@@ -151,7 +148,7 @@ public class EchoServer extends AbstractServer
 	 
 	 
 	 
-	 //Start Tic-Tac-Toe
+	 
 	 else if (message.indexOf("#TTT")==0){
 		 String move = message.substring(message.indexOf(" "), message.length());
 		 move = move.trim();
@@ -227,7 +224,7 @@ public class EchoServer extends AbstractServer
 			 client.setInfo("pingCount", 1);
 		 }
 		 else{
-			 int pingCount = ((int)(client.getInfo("pingCount")));
+			 int pingCount = (int)(client.getInfo("pingCount"));
 			 pingCount++;
 			 client.setInfo("pingCount", pingCount);
 		 }

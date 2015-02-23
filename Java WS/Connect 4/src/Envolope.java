@@ -1,6 +1,8 @@
 import java.io.Serializable;
 
-
+//Envelope is what we are sending back and forth.
+//Holds all info, who's turn it is, etc
+//ServerConsole disassembles this and outputs 
 public class Envolope implements Serializable {
 
 	private Object data;

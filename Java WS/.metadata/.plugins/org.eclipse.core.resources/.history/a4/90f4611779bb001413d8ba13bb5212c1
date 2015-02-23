@@ -227,7 +227,7 @@ public class EchoServer extends AbstractServer
 			 client.setInfo("pingCount", 1);
 		 }
 		 else{
-			 int pingCount = ((int)(client.getInfo("pingCount")));
+			 int pingCount = (int)(client.getInfo("pingCount"));
 			 pingCount++;
 			 client.setInfo("pingCount", pingCount);
 		 }
