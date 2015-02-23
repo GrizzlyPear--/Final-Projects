@@ -40,6 +40,14 @@ public class ChatClient extends AbstractClient
     openConnection();
   }
 
+  public ChatClient(String host, int port, String userName, ChatIF clientUI) 
+		    throws IOException 
+		  {
+		    super(host, port); //Call the superclass constructor
+		    this.clientUI = clientUI;
+		    openConnection();
+		    sendToServer("#Login " + userName);
+		  }
   
   //Instance methods ************************************************
     
@@ -50,8 +58,22 @@ public class ChatClient extends AbstractClient
    */
   public void handleMessageFromServer(Object msg) 
   {
-    clientUI.display(msg.toString());
+	  if(msg instanceof Envolope)
+	  {
+		  Envolope e = (Envolope)msg;
+		  int[][] board = (int[][])(e.getCommand());
+		  
+		  for(int i=0; i<3; i++){
+			  for(int j=0; j<3; j++)
+				  ((GUIConsole)clientUI).displayBoard(""+board[i][j]);
+		  ((GUIConsole)clientUI).displayBoard("\n");
+	  }
+	  }
+	  else{
+		  clientUI.display(msg.toString());
+	  }
   }
+	  
 
   /**
    * This method handles all data coming from the UI            
@@ -60,21 +82,128 @@ public class ChatClient extends AbstractClient
    */
   public void handleMessageFromClientUI(String message)
   {
-    try
-    {
-      sendToServer(message);
-    }
-    catch(IOException e)
-    {
-      clientUI.display
-        ("Could not send message to server.  Terminating client.");
-      quit();
-    }
+	  if(message.indexOf("#")==0){
+		  handleClientCommand(message);
+	  }
+	  else{
+		  try
+		  {    	
+			  sendToServer(message);
+		  }
+		  catch(IOException e)
+		  {
+			  clientUI.display
+			  ("Could not send message to server.  Terminating client.");
+			  quit();
+		  }
+	  }
   }
   
-  /**
-   * This method terminates the client.
-   */
+ public void handleClientCommand(String message){
+	 
+	 if(message.indexOf("#setPort")==0){
+		 
+		 int space = message.indexOf(" ");
+		 int end = message.length();		 
+		 String newPort = message.substring(space, end);
+		 newPort = newPort.trim();
+		 int portNum = Integer.parseInt(newPort);		 
+		 setPort(portNum);		 
+		 clientUI.display("Port now set to "+ getPort());
+		 
+	 }
+	 	 	
+	 else if(message.indexOf("#ping")==0){
+		 clientUI.display("I said ping");
+		 tryToSendToServer(message);
+	 }
+	 
+	 else if(message.indexOf("#testEnvolope")==0)
+	 {
+		 Envolope e = new Envolope(message, "#ping");
+		 clientUI.display("Sending envolope");
+		 tryToSendToServer(e);
+		 
+	 }
+	 
+	 else if(message.indexOf("#TicTacToe")==0){
+		 int[][] board = new int[3][3];
+		 Envolope e = new Envolope("#TicTacToe", board, "bob", "doug");
+		 tryToSendToServer(e);
+		 
+	 }
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 else if(message.indexOf("#Connect4")==0){
+		 
+		 
+		  
+		
+		String[][] board = new String[7][15];
+	
+		    for (int i =0;i<board.length;i++)
+		    {
+		       		   
+		       for (int j =0;j<board[i].length;j++)
+		      {
+		        if (j% 2 == 0) board[i][j] ="|";
+		        else board[i][j] = " ";
+		         
+		  
+		        if (i==6) board[i][j]= "-";
+		      }
+		       
+		    }
+		Envolope e = new Envolope("#Connect4", board, "bob", "doug");  
+		tryToSendToServer(e); 
+		 
+	 }
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 else if (message.indexOf("#TTT")==0){
+		 tryToSendToServer(message);
+	 }
+	 
+	 else {
+		 tryToSendToServer(message);
+	 }
+ 
+	 
+	/** else{
+		 try{
+		 sendToServer(message);
+		 }
+		 catch(IOException ioe)
+		 {
+			 ioe.printStackTrace();
+	 }
+	 }*/
+ }
+ 
+ public void tryToSendToServer(Object message){
+	 try{
+		 sendToServer(message);		 
+	 }
+	 catch(IOException ioe)
+	 {
+		 ioe.printStackTrace();
+	 }
+ }
+  
+    //This method terminates the client.
+   
   public void quit()
   {
     try
@@ -83,6 +212,10 @@ public class ChatClient extends AbstractClient
     }
     catch(IOException e) {}
     System.exit(0);
+  }
+  
+  protected void connectionException( Exception exception){
+	  System.out.println("The server has terminated the connection");
   }
 }
 //End of ChatClient class
