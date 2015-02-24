@@ -145,24 +145,29 @@ public class EchoServer extends AbstractServer
 		 }
 		 
 		    String[][] f = createPattern();
-
+		    //Time to make a condition for our game to keep on
+		    //playing
 		    boolean loop = true;
-
+		    //We need something to keep track of whose turn it is
 		    int count = 0;
 		    printPattern(f);
 		    while(loop)
 		    {
- 
+		       //Let's say that Red gets the first turn and thus
+		       //every other turn 
 		       if (count % 2 == 0) dropRedPattern(f);
 		       else dropYellowPattern(f);
-		       count++;
+		       count++;//We need to keep track of the turns
 		       printPattern(f);
+		       //Let's say we want to check for a winner during every
+		       //turn made and say who it is
 		       if (checkWinner(f) != null)
 		       {
 		          if (checkWinner(f) == "R")
 		             System.out.println("The red player won.");
 		          else if (checkWinner(f)== "Y")
-		            System.out.println("The yellow player won.");		      
+		            System.out.println("The yello player won.");
+		         //Well, if someone one, then the game has to end
 		         loop = false;
 		    }
 		  }
@@ -383,27 +388,7 @@ public class EchoServer extends AbstractServer
 	     }
 	   }
 
-	 public String[][] createPattern()
-	  {
-	     String[][] f = new String[7][15];
-	     
-	  
-	    for (int i =0;i<f.length;i++)
-	    {
-	       
-	       for (int j =0;j<f[i].length;j++)
-	      {
-	        if (j% 2 == 0) f[i][j] ="|";
-	        else f[i][j] = " ";
-	         
-	        if (i==6) f[i][j]= "-";
-	      }
-	       
-	    }
-	    return f;
-	  }
-	 
-	  public void printPattern(String[][] f)
+	  public void printPattern(int[][] f)
 	  {
 	    for (int i =0;i<f.length;i++)
 	    {
@@ -419,7 +404,6 @@ public class EchoServer extends AbstractServer
 	  public void dropYellowPattern(String[][] f)
 	  {
 	    System.out.println("Drop a yellow disk at column (0–6): ");
-	    //handleMessageFromClient()
 	    Scanner scan = new Scanner (System.in);
 	    int c = 2*scan.nextInt()+1;
 	    for (int i =5;i>=0;i--)

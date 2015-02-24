@@ -162,7 +162,7 @@ public class EchoServer extends AbstractServer
 		          if (checkWinner(f) == "R")
 		             System.out.println("The red player won.");
 		          else if (checkWinner(f)== "Y")
-		            System.out.println("The yellow player won.");		      
+		            System.out.println("The yello player won.");		      
 		         loop = false;
 		    }
 		  }
@@ -419,7 +419,6 @@ public class EchoServer extends AbstractServer
 	  public void dropYellowPattern(String[][] f)
 	  {
 	    System.out.println("Drop a yellow disk at column (0–6): ");
-	    //handleMessageFromClient()
 	    Scanner scan = new Scanner (System.in);
 	    int c = 2*scan.nextInt()+1;
 	    for (int i =5;i>=0;i--)
